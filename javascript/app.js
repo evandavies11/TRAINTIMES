@@ -11,7 +11,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-var dataRef = firebase.database();
+var database = firebase.database();
 console.log("hello")
 
 // Initial Values
