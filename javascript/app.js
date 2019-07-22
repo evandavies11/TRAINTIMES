@@ -21,17 +21,17 @@ console.log("hello")
 //var nextArrival = "";
 //var minutesAway = "";
 
-// 2. Button for adding Employees
+// train button function
 $("#add-train-btn").on("click", function (event) {
     event.preventDefault();
 
-    // Grabs user input
+    // user input
     var trainName = $("#train-name-input").val().trim();
     var trainDestination = $("#destination-input").val().trim();
     var firstTrain = moment($("#first-train-input").val().trim(), "HH:MM").format("X");
     var trainFrequency = $("#frequency-input").val().trim();
 
-    // Creates local "temporary" object for holding employee data
+    //object for holding train data
     var newTrain = {
         train: trainName,
         destination: trainDestination,
@@ -39,11 +39,11 @@ $("#add-train-btn").on("click", function (event) {
         frequency: trainFrequency
     };
 
-    // Uploads employee data to the database
+    // train to database
     database.ref().push(newTrain);
 
-    // Logs everything to console
-    console.log(newTrain.name);
+    // Log dat data
+    console.log(newTrain.train);
     console.log(newTrain.destination);
     console.log(newTrain.start);
     console.log(newTrain.frequency);
