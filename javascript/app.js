@@ -1,6 +1,6 @@
 //firebase api
 var firebaseConfig = {
-    apiKey: "AIzaSyB3cUvsTdygvu59ygu9GQbCpToP43hu1Go",
+    apiKey: "",
     authDomain: "traintimestest.firebaseapp.com",
     databaseURL: "https://traintimestest.firebaseio.com",
     projectId: "traintimestest",
