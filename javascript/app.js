@@ -12,11 +12,13 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
-console.log("hello")
+console.log("hello");
 
 // Initial Values
 //var trainName = "";
-//var destination = "";
+//var traindestination = "";
+//var firstTrain = "";
+//var trainFrequency = "";
 //var frequency = 0;
 //var nextArrival = "";
 //var minutesAway = "";
@@ -57,8 +59,35 @@ $("#add-train-btn").on("click", function (event) {
     $("#frequency-input").val("");
 });
 
+//collect dat data
+database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
 
+    //variables 
+    var trainName= childSnapshot.val().train;
+    var trainDestination= childSnapshot.val().destination;
+    var firstTrain = childSnapshot.val().start;
+    var trainFrequency = childSnapshot.val().frequency;
 
+    // trainybois
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(firstTrain);
+    console.log(trainFrequency );
+
+      // Create the new row
+  var newRow = $("<tr>").append(
+    $("<td>").text(trainName),
+    $("<td>").text(trainDestination),
+   
+    $("<td>").text(trainFrequency),
+    
+  );
+
+  // Append the new row to the table
+  $("#train-table > tbody").append(newRow);
+
+});
 //time converter
 var frequency = 3;
 
@@ -66,7 +95,7 @@ var frequency = 3;
 var firstTime = "03:30";
 
 // First Time (pushed back 1 year to make sure it comes before current time)
-var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+var firstTimeConverted = moment(firstTime, "HH:MM").subtract(1, "years");
 console.log(firstTimeConverted);
 
 // Current Time
