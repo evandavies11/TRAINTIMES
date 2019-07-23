@@ -25,63 +25,73 @@ console.log("hello");
 
 // train button function
 $("#add-train-btn").on("click", function (event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    // user input
-    var trainName = $("#train-name-input").val().trim();
-    var trainDestination = $("#destination-input").val().trim();
-    var firstTrain = moment($("#first-train-input").val().trim(), "HH:MM").format("X");
-    var trainFrequency = $("#frequency-input").val().trim();
+  // user input
+  var trainName = $("#train-name-input").val().trim();
+  var trainDestination = $("#destination-input").val().trim();
+  var firstTrain = moment($("#first-train-input").val().trim(), "HH:mm").format("X");
+  var trainFrequency = $("#frequency-input").val().trim();
 
-    //object for holding train data
-    var newTrain = {
-        train: trainName,
-        destination: trainDestination,
-        start: firstTrain,
-        frequency: trainFrequency
-    };
+  //object for holding train data
+  var newTrain = {
+    train: trainName,
+    destination: trainDestination,
+    start: firstTrain,
+    frequency: trainFrequency
+  };
 
-    // train to database
-    database.ref().push(newTrain);
+  // train to database
+  database.ref().push(newTrain);
 
-    // Log dat data
-    console.log(newTrain.train);
-    console.log(newTrain.destination);
-    console.log(newTrain.start);
-    console.log(newTrain.frequency);
+  // Log dat data
+  console.log(newTrain.train);
+  console.log(newTrain.destination);
+  console.log(newTrain.start);
+  console.log(newTrain.frequency);
 
-    alert("Train successfully added");
+  alert("Train successfully added");
 
-    // Clears all of the text-boxes
-    $("#train-name-input").val("");
-    $("#destination-input").val("");
-    $("#first-train-input").val("");
-    $("#frequency-input").val("");
+  // Clears all of the text-boxes
+  $("#train-name-input").val("");
+  $("#destination-input").val("");
+  $("#first-train-input").val("");
+  $("#frequency-input").val("");
 });
 
 //collect dat data
 database.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
+  console.log(childSnapshot.val());
 
-    //variables 
-    var trainName= childSnapshot.val().train;
-    var trainDestination= childSnapshot.val().destination;
-    var firstTrain = childSnapshot.val().start;
-    var trainFrequency = childSnapshot.val().frequency;
+  //variables 
+  var trainName = childSnapshot.val().train;
+  var trainDestination = childSnapshot.val().destination;
+  var firstTrain = childSnapshot.val().start;
+  var trainFrequency = childSnapshot.val().frequency;
 
-    // trainybois
-    console.log(trainName);
-    console.log(trainDestination);
-    console.log(firstTrain);
-    console.log(trainFrequency );
+  // trainybois
+  console.log(trainName);
+  console.log(trainDestination);
+  console.log(firstTrain);
+  console.log(trainFrequency);
 
-      // Create the new row
+  //convert from unix
+  // var trainStartPretty = moment.unix(firstTrain).format("HH:mm");
+  //first time converted but do i need this
+  //var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+  //console.log(firstTimeConverted);
+  // Current Time
+  var currentTime = moment();
+  console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+
+  // Create the new row
   var newRow = $("<tr>").append(
     $("<td>").text(trainName),
     $("<td>").text(trainDestination),
-   
     $("<td>").text(trainFrequency),
-    
+    //$("<td>").text(trainArrival),
+
   );
 
   // Append the new row to the table
