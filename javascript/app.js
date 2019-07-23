@@ -1,12 +1,12 @@
 //firebase api
 var firebaseConfig = {
-    apiKey: "",
-    authDomain: "traintimestest.firebaseapp.com",
-    databaseURL: "https://traintimestest.firebaseio.com",
-    projectId: "traintimestest",
-    storageBucket: "",
-    messagingSenderId: "664390182714",
-    appId: "1:664390182714:web:1d731dfed46b28ad"
+  apiKey: "AIzaSyB3cUvsTdygvu59ygu9GQbCpToP43hu1Go",
+  authDomain: "traintimestest.firebaseapp.com",
+  databaseURL: "https://traintimestest.firebaseio.com",
+  projectId: "traintimestest",
+  storageBucket: "",
+  messagingSenderId: "664390182714",
+  appId: "1:664390182714:web:1d731dfed46b28ad"
 };
 
 firebase.initializeApp(firebaseConfig);
