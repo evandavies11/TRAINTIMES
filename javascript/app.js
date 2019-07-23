@@ -30,7 +30,7 @@ $("#add-train-btn").on("click", function (event) {
   // user input
   var trainName = $("#train-name-input").val().trim();
   var trainDestination = $("#destination-input").val().trim();
-  var firstTrain = moment($("#first-train-input").val().trim(), "HH:mm").format("X");
+  var firstTrain = moment($("#first-train-input").val().trim()).format("MMMM Do YYYY, h:mm:ss a");
   var trainFrequency = $("#frequency-input").val().trim();
 
   //object for holding train data
@@ -42,7 +42,7 @@ $("#add-train-btn").on("click", function (event) {
   };
 
   //train timestamp
-  //console.log(firstTrain.format("HH:mm"));
+  console.log(firstTrain);
 
   // train to database
   database.ref().push(newTrain);
@@ -111,6 +111,7 @@ database.ref().on("child_added", function (childSnapshot) {
     $("<td>").text(trainDestination),
     $("<td>").text(trainFrequency),
     $("<td>").text(trainArrival),
+    $("<td>").text(tMinutesTillTrain),
 
   );
 
