@@ -41,6 +41,9 @@ $("#add-train-btn").on("click", function (event) {
     frequency: trainFrequency
   };
 
+  //train timestamp
+  //console.log(firstTrain.format("HH:mm"));
+
   // train to database
   database.ref().push(newTrain);
 
@@ -82,7 +85,24 @@ database.ref().on("child_added", function (childSnapshot) {
   //console.log(firstTimeConverted);
   // Current Time
   var currentTime = moment();
-  console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+  console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+
+  // Difference between the times
+  var diffTime = moment().diff(moment(firstTrain), "minutes");
+  console.log("DIFFERENCE IN TIME: " + diffTime);
+
+  // Time apart (remainder)
+  var tRemainder = diffTime % trainFrequency;
+  console.log(tRemainder);
+
+  // Minute Until Train
+  var tMinutesTillTrain = trainFrequency - tRemainder;
+  console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+  // Next Train
+  var trainArrival = moment().add(tMinutesTillTrain, "minutes");
+  console.log("ARRIVAL TIME: " + moment(trainArrival).format("HH:mm"));
+
 
 
   // Create the new row
@@ -90,7 +110,7 @@ database.ref().on("child_added", function (childSnapshot) {
     $("<td>").text(trainName),
     $("<td>").text(trainDestination),
     $("<td>").text(trainFrequency),
-    //$("<td>").text(trainArrival),
+    $("<td>").text(trainArrival),
 
   );
 
