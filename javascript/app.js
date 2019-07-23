@@ -30,7 +30,7 @@ $("#add-train-btn").on("click", function (event) {
   // user input
   var trainName = $("#train-name-input").val().trim();
   var trainDestination = $("#destination-input").val().trim();
-  var firstTrain = moment($("#first-train-input").val().trim()).format("MMMM Do YYYY, h:mm:ss a");
+  var firstTrain = $("#first-train-input").val().trim();
   var trainFrequency = $("#frequency-input").val().trim();
 
   //object for holding train data
@@ -81,14 +81,13 @@ database.ref().on("child_added", function (childSnapshot) {
   //convert from unix
   // var trainStartPretty = moment.unix(firstTrain).format("HH:mm");
   //first time converted but do i need this
-  //var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+  var firstTrainConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
   //console.log(firstTimeConverted);
   // Current Time
-  var currentTime = moment();
-  console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+
 
   // Difference between the times
-  var diffTime = moment().diff(moment(firstTrain), "minutes");
+  var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
   console.log("DIFFERENCE IN TIME: " + diffTime);
 
   // Time apart (remainder)
@@ -99,9 +98,12 @@ database.ref().on("child_added", function (childSnapshot) {
   var tMinutesTillTrain = trainFrequency - tRemainder;
   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
+
   // Next Train
   var trainArrival = moment().add(tMinutesTillTrain, "minutes");
   console.log("ARRIVAL TIME: " + moment(trainArrival).format("HH:mm"));
+
+  var trainArrival = moment(tMinutesTillTrain).format("HH:mm");
 
 
 
